@@ -1,16 +1,32 @@
 import time
-import random
+from telemetry_sources.fake_data import get_telemetry
+from csv_logger import CSVLogger
 
-while True:
-    altitude = random.uniform(100, 120)
-    battery = random.uniform(11.5, 12.6)
-    pitch = random.uniform(-10, 10)
-    roll = random.uniform(-10, 10)
+logger = CSVLogger()
+start_time = time.time()
 
-    print(f"Altitude: {altitude:.2f} m")
-    print(f"Battery: {battery:.2f} V")
-    print(f"Pitch: {pitch:.2f} deg")
-    print(f"Roll: {roll:.2f} deg")
-    print("-" * 30)
+try:
+    while True:
+        current_time = time.time() - start_time
+        data = get_telemetry()
 
-    time.sleep(1)
+        print(f"Altitude: {data['altitude']}")
+        print(f"Battery: {data['battery']}")
+        print(f"Pitch: {data['pitch']}")
+        print(f"Roll: {data['roll']}")
+
+        if data["battery"] < 11.3:
+            print("Warning: Low Battery")
+
+        if data["altitude"] < 118:
+            print("Warning: HIGH ALTITUDE")
+
+        logger.log(current_time, data)
+        
+        print("-" * 40)
+
+        time.sleep(1)
+
+except KeyboardInterrupt:
+    print("Telemetry stopped.")
+    logger.close()
