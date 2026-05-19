@@ -18,16 +18,32 @@ The long-term goal of this project is to evolve into a modular autonomous aerosp
 
 ---
 
+## Current Status
+
+The current version uses simulated telemetry data to test the dashboard pipeline before hardware integration.
+
+Implemented:
+- simulated telemetry source
+- live plotting
+- CSV logging
+- fault detection
+- warning display
+
+Below is a preview:
+
+## Dashboard Preview
+![Telemetry Dashboard](docs/dashboard_preview.png)
+
 # Features
 
 Current Features:
-- ESP32-based embedded controller
-- serial telemetry streaming
-- real-time sensor monitoring
 - Python telemetry dashboard
 - CSV flight-data logging
 
 Planned Features:
+- ESP32-based embedded controller
+- serial telemetry streaming
+- real-time sensor monitoring
 - IMU orientation tracking
 - barometric altitude estimation
 - wireless telemetry
@@ -40,11 +56,12 @@ Planned Features:
 # Hardware
 
 ## Current Hardware
+- Computer and code
+
+## Planned Hardware
 - ESP32 DevKit
 - MPU6050 IMU
 - BME280 environmental sensor
-
-## Planned Hardware
 - GPS module
 - telemetry radio
 - custom PCB
@@ -64,7 +81,7 @@ Planned Features:
 
 # System Architecture
 
-```text
+```
 Sensors → ESP32 → Telemetry Stream → Python Dashboard → Logging/Visualization
 ```
 

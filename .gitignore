@@ -1,3 +1,10 @@
 # Virtual environments
 .venv/
 venv/
+
+# Logs
+.logs/
+telemetry_logs/
+
+# Cache
+__pycache__/
