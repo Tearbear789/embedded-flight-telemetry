@@ -29,13 +29,16 @@ Implemented:
 - fault detection
 - warning display
 
-Below is a preview:
+Below is a progression of the Telemetry Dashboard
 
 ## Dashboard Preview
 ![Telemetry Dashboard v1](docs/dashboard_preview1.png)
 
-And the Updated Dashboard Preview v2
+Updated Dashboard Preview v2
 ![Telemetry Dashboard v2](docs/dashboard_preview2.png)
+
+Updated Dashboard Preview v3
+![Telemetry Dashboard v3](docs/dashboard_preview3.png)
 
 
 # Features

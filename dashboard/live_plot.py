@@ -12,11 +12,11 @@ roll_data = deque(maxlen=50)
 
 plt.ion()
 
-fig, (ax_plot, ax_faults) = plt.subplots(
-    2,
+fig, (ax_status, ax_altitude, ax_battery, ax_attitude, ax_faults) = plt.subplots(
+    5,
     1,
-    figsize=(10, 7),
-    gridspec_kw={"height_ratios": [3, 1]}
+    figsize=(10, 11),
+    gridspec_kw={"height_ratios": [1, 2, 2, 2, 1]}
 )
 
 def update_plot(current_time, data, faults):
@@ -27,24 +27,52 @@ def update_plot(current_time, data, faults):
     pitch_data.append(data["pitch"])
     roll_data.append(data["roll"])
 
-    ax_plot.clear()
+    ax_status.clear()
+    ax_status.axis("off")
+    status_text = (
+        f"Altitude: {data['altitude']:.2f} m\n"
+        f"Battery: {data['battery']:.2f} V\n"
+        f"Pitch: {data['pitch']:.2f}°\n"
+        f"Roll: {data['roll']:.2f}°"
+    )
 
-    ax_plot.plot(time_data, altitude_data, label="Altitude")
-    ax_plot.plot(time_data, battery_data, label="Battery")
-    ax_plot.plot(time_data, pitch_data, label="Pitch")
-    ax_plot.plot(time_data, roll_data, label="Roll")
+    ax_status.text(
+        0.02,
+        0.5,
+        status_text,
+        fontsize=12,
+        verticalalignment="center",
+        family="monospace"
+    )
 
-    ax_plot.set_title("Flight Telemetry")
-    ax_plot.set_xlabel("Time (s)")
-    ax_plot.legend()
+    ax_altitude.clear()
+    ax_altitude.plot(time_data, altitude_data, label="Altitude")
+    ax_altitude.set_title("Altitude")
+    ax_altitude.set_ylabel("Meters (m)")
+    ax_altitude.legend()
+
+    ax_battery.clear()
+    ax_battery.plot(time_data, battery_data, label="Battery")
+    ax_battery.set_title("Battery")
+    ax_battery.set_ylabel("Volts (V)")
+    ax_battery.legend()
+
+    ax_attitude.clear()
+    ax_attitude.plot(time_data, pitch_data, label="Pitch")
+    ax_attitude.plot(time_data, roll_data, label="Roll")
+    ax_attitude.set_title("Attitude")
+    ax_attitude.set_ylabel("Degrees (°)")
+    ax_attitude.set_xlabel("Time (s)")
+    ax_attitude.legend()
+
 
     ax_faults.clear()
     ax_faults.axis("off")
     ax_faults.set_title("Fault Indicators")
 
     indicators = [
-        "LOW BATTERY",
         "HIGH ALTITUDE",
+        "LOW BATTERY",
         "HIGH PITCH ANGLE",
         "HIGH ROLL ANGLE"
     ]
@@ -69,4 +97,4 @@ def update_plot(current_time, data, faults):
             )
 
     plt.tight_layout()
-    plt.pause(0.01)
+    plt.pause(0.1)
