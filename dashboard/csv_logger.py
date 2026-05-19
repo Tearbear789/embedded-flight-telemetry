@@ -2,7 +2,7 @@ import csv
 from pathlib import Path
 
 class CSVLogger:
-    def __init__(self, filename="telemetry_logs/telemetry_log.csv"):
+    def __init__(self, filename="dashboard/telemetry_logs/telemetry_log.csv"):
         self.file_path = Path(filename)
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
