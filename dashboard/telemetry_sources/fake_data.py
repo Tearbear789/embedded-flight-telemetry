@@ -1,5 +1,6 @@
 import random
 
+# Creates randomize data to test dashboard
 def get_telemetry():
 
     telemetry = {

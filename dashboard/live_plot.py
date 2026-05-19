@@ -12,6 +12,7 @@ roll_data = deque(maxlen=50)
 
 plt.ion()
 
+# 5x1 Subplot
 fig, (ax_status, ax_altitude, ax_battery, ax_attitude, ax_faults) = plt.subplots(
     5,
     1,
@@ -19,6 +20,7 @@ fig, (ax_status, ax_altitude, ax_battery, ax_attitude, ax_faults) = plt.subplots
     gridspec_kw={"height_ratios": [1, 2, 2, 2, 1]}
 )
 
+# Takes in data, and creates a live plot
 def update_plot(current_time, data, faults):
 
     time_data.append(current_time)

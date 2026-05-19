@@ -1,3 +1,4 @@
+# Output fault if data is outside threshold
 def check_faults(data):
     faults = []
 

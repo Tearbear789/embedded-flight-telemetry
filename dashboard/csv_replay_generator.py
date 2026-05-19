@@ -1,6 +1,6 @@
 import csv
 
-
+# Parses telemetry logs and returns data in dictionary format
 def telemetry_generator(filename="dashboard/telemetry_logs/telemetry_log.csv"):
 
     with open(filename, mode="r", newline="") as file:
