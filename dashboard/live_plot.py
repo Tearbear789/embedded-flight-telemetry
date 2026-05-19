@@ -12,8 +12,12 @@ roll_data = deque(maxlen=50)
 
 plt.ion()
 
-fig, ax = plt.subplots()
-
+fig, (ax_plot, ax_faults) = plt.subplots(
+    2,
+    1,
+    figsize=(10, 7),
+    gridspec_kw={"height_ratios": [3, 1]}
+)
 
 def update_plot(current_time, data, faults):
 
@@ -23,31 +27,46 @@ def update_plot(current_time, data, faults):
     pitch_data.append(data["pitch"])
     roll_data.append(data["roll"])
 
-    ax.clear()
+    ax_plot.clear()
 
-    ax.plot(time_data, altitude_data, label="Altitude")
-    ax.plot(time_data, battery_data, label="Battery")
-    ax.plot(time_data, pitch_data, label="Pitch")
-    ax.plot(time_data, roll_data, label="Roll")
+    ax_plot.plot(time_data, altitude_data, label="Altitude")
+    ax_plot.plot(time_data, battery_data, label="Battery")
+    ax_plot.plot(time_data, pitch_data, label="Pitch")
+    ax_plot.plot(time_data, roll_data, label="Roll")
 
-    ax.set_title("Flight Telemetry")
-    ax.set_xlabel("Time (s)")
-    ax.legend()
+    ax_plot.set_title("Flight Telemetry")
+    ax_plot.set_xlabel("Time (s)")
+    ax_plot.legend()
 
-    if not faults:
-        fault_text = "SYSTEM NOMINAL"
-        box_color = "lightgray"
-    else:
-        fault_text = "Faults: " + ", ".join(faults)
-        box_color = "red"
-    ax.text(
-        0.02,
-        0.95,
-        fault_text,
-        transform=ax.transAxes,
-        fontsize=10,
-        verticalalignment="top",
-        bbox=dict(boxstyle="round", facecolor=box_color, alpha=0.7)
-    )
+    ax_faults.clear()
+    ax_faults.axis("off")
+    ax_faults.set_title("Fault Indicators")
 
+    indicators = [
+        "LOW BATTERY",
+        "HIGH ALTITUDE",
+        "HIGH PITCH ANGLE",
+        "HIGH ROLL ANGLE"
+    ]
+
+    for i, fault_name in enumerate(indicators):
+            is_active = fault_name in faults
+
+            color = "red" if is_active else "lightgray"
+
+            ax_faults.text(
+                0.1 + i * 0.22,
+                0.5,
+                fault_name,
+                ha="center",
+                va="center",
+                fontsize=10,
+                bbox=dict(
+                    boxstyle="round,pad=0.5",
+                    facecolor=color,
+                    edgecolor="black"
+                )
+            )
+
+    plt.tight_layout()
     plt.pause(0.01)

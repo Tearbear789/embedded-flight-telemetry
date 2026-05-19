@@ -32,7 +32,11 @@ Implemented:
 Below is a preview:
 
 ## Dashboard Preview
-![Telemetry Dashboard](docs/dashboard_preview.png)
+![Telemetry Dashboard v1](docs/dashboard_preview1.png)
+
+And the Updated Dashboard Preview v2
+![Telemetry Dashboard v2](docs/dashboard_preview2.png)
+
 
 # Features
 
