@@ -19,16 +19,15 @@ try:
         else:
             print("System nominal")
 
-        print(f"Altitude: {data['altitude']}")
-        print(f"Battery: {data['battery']}")
-        print(f"Pitch: {data['pitch']}")
-        print(f"Roll: {data['roll']}")
+        # print(f"Altitude: {data['altitude']}")
+        # print(f"Battery: {data['battery']}")
+        # print(f"Pitch: {data['pitch']}")
+        # print(f"Roll: {data['roll']}")
 
         logger.log(current_time, data)
         update_plot(current_time, data, faults)
-
         
-        print("-" * 40)
+        # print("-" * 40)
 
         time.sleep(0.2)
 
