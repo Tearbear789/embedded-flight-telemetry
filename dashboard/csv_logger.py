@@ -1,6 +1,7 @@
 import csv
 from pathlib import Path
 
+# Creates a CSV of data
 class CSVLogger:
     def __init__(self, filename="dashboard/telemetry_logs/telemetry_log.csv"):
         self.file_path = Path(filename)
