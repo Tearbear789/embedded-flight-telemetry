@@ -1,18 +1,29 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+// Initialize
+void setup()
+{
+    Serial.begin(115200);
+    delay(1000);
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+    Serial.println("altitude,battery,pitch,roll");
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
+// Main Loop generating random telemetry data
+void loop()
+{
+    float altitude = random(1000, 1200) / 10.0;
+    float battery = random(110, 126) / 10.0;
+    float pitch = random(-100, 100) / 10.0;
+    float roll = random(-100, 100) / 10.0;
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+    Serial.print(altitude);
+    Serial.print(",");
+    Serial.print(battery);
+    Serial.print(",");
+    Serial.print(pitch);
+    Serial.print(",");
+    Serial.println(roll);
+
+    delay(250);
 }
